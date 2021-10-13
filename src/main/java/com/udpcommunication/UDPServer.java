@@ -30,9 +30,8 @@ public class UDPServer {
 				DatagramPacket received_packet = new DatagramPacket(buffer, buffer.length, address, port);
 				serverSocket.receive(received_packet);
 				
-
+				//This is an object command.
 				Command received_command = SerializationUtils.deserialize(received_packet.getData());
-				
 
 				System.out.println(received_command.getCommand_number());
 			} catch (Exception e) {
@@ -40,4 +39,6 @@ public class UDPServer {
 			}
 		}
 	}
+	
+	
 }
