@@ -24,6 +24,7 @@ public class UDPServer {
 
 	public void run() {
 		while (true) {
+			//Some other small change
 			try (DatagramSocket serverSocket = new DatagramSocket(port);) {
 				InetAddress address = InetAddress.getLocalHost();
 				byte[] buffer = new byte[256];
