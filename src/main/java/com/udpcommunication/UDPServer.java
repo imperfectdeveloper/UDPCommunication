@@ -33,6 +33,13 @@ public class UDPServer {
 				
 				//This is an object command.
 				Command received_command = SerializationUtils.deserialize(received_packet.getData());
+				
+				buffer = "This is your reply".getBytes();
+				
+				
+				DatagramPacket sent_packet = new DatagramPacket(buffer, buffer.length, 
+						received_packet.getAddress(), received_packet.getPort());
+				serverSocket.send(sent_packet);
 
 				System.out.println(received_command.getCommand_number());
 			} catch (Exception e) {
