@@ -34,7 +34,10 @@ public class UDPServer {
 				//This is an object command.
 				Command received_command = SerializationUtils.deserialize(received_packet.getData());
 				
-				buffer = "This is your reply".getBytes();
+				Response response = new Response((byte)1,
+						"You chose command: "+ received_command.getCommand_number());
+				
+				buffer = SerializationUtils.serialize(response);
 				
 				
 				DatagramPacket sent_packet = new DatagramPacket(buffer, buffer.length, 

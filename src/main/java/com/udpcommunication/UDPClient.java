@@ -32,10 +32,13 @@ public class UDPClient {
 				Scanner scanner = new Scanner(System.in);
 				message = scanner.nextLine();
 				
-				
 				if(message.equals("1") ) {
-					Command get_time_command = new Command((byte)1);
-					buffer = SerializationUtils.serialize(get_time_command);
+					Command firs_command = new Command((byte)1);
+					buffer = SerializationUtils.serialize(firs_command);
+				}
+				else if (message.equals("2")) {
+					Command second_Command = new Command((byte)2);
+					buffer = SerializationUtils.serialize(second_Command);
 				}
 				else {
 					System.out.println("Invalid command");
@@ -49,9 +52,9 @@ public class UDPClient {
 				DatagramPacket response_packet = new DatagramPacket(buffer, buffer.length, address, port);
 				clientSocket.receive(response_packet);
 				
-				String reply_message = new String(response_packet.getData());
-				
-				System.out.println("received from the server: "+reply_message);
+				Response response = SerializationUtils.deserialize(buffer);
+				System.out.println("The status of the command is: "+ response.getResponse_status());
+				System.out.println("The message of the command is: "+ response.getResponse_object());
 				
 
 			} catch (Exception e) {
